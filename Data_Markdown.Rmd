@@ -3,6 +3,8 @@ title: "Class05"
 author: "Alex Clegg"
 date: "2/12/2020"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -74,6 +76,16 @@ Test your knowledge: Write the code to pivot the New Hampshire data to a longer 
 
 ```{r}
 
+nh_counties_long <- nh_counties_all %>%
+  pivot_longer(cols = c(-name, -fips), names_to = "Candidate", values_to = "Votes")
+head(nh_counties_long, n=20)
+
+nh_counties_agg <- nh_counties_long %>%
+  group_by(Candidate) %>%
+  summarize(total_sdes = sum(Votes)) %>%
+  arrange(desc(total_sdes))
+
+head(nh_counties_agg, n=15)
 
 ```
 
@@ -138,4 +150,6 @@ primary_results <- function(date, state){
 Test the function with Iowa and New Hampshire!
 
 ```{r}
-# test here!
+
+primary_results("2020-02-11", "new-hampshire")
+
