@@ -3,6 +3,8 @@ title: "Class05"
 author: "Alex Clegg"
 date: "2/12/2020"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -74,6 +76,9 @@ Test your knowledge: Write the code to pivot the New Hampshire data to a longer 
 
 ```{r}
 
+nh_counties_long <- nh_counties_all %>%
+  pivot_longer(cols = c(-name), names_to = "Candidiate", values_to = "Votes")
+head(nh_counties_long, n=20)
 
 ```
 
